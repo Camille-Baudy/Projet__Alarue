@@ -184,7 +184,6 @@ switch ($action) {
 			if (isset($_SESSION['nom'])) {
 				$code = 0;
 				require_once MODELSPATH . 'f_inscription.php';
-				require_once TEMPLATESPATH . 'v_header.php';
 
 				//Attention si plusieurs utilisateurs s'incrivent en même temps !!!! récup max()
 				//Préférer conserver id dans une variable session au moment de la création.
@@ -202,156 +201,45 @@ switch ($action) {
 					$id=$idS['idSession'];
 				}
 
-				if (isset($_REQUEST['8h'])) {
-					$leJour = date('Y-m-d', strtotime($_REQUEST['leJour']));
-					$start = $leJour . " 08:00:00";
-					$end = $leJour . " 09:00:00";
-					inscription\ajouterHoraireLibreBenevole($start, $end, $idBenevole, $id);
+				if (isset($_REQUEST['non-dispo'])) {
+					//on fait rien
 				}
 
-				if (isset($_REQUEST['9h'])) {
-					$leJour = date('Y-m-d', strtotime($_REQUEST['leJour']));
-					$start = $leJour . " 09:00:00";
-					$end = $leJour . " 10:00:00";
-					inscription\ajouterHoraireLibreBenevole($start, $end, $idBenevole, $id);
+				$horaireDebut="";
+				$horaireFin="";
+				//$leDebut correspond à la date dans v_date.php
+				$leDebut=$_POST['dateJour'];
+				var_dump($leDebut);
+				//horaire de début MATIN
+				if (isset($_POST['matin-d'])) {
+					$horaireDebut=$leDebut." ".$_POST['matin-d'];
+				}
+				
+				if (isset($_POST['matin-f'])) {
+					$horaireFin=$leDebut." ".$_POST['matin-f'];
 				}
 
-				if (isset($_REQUEST['10h'])) {
-					$leJour = date('Y-m-d', strtotime($_REQUEST['leJour']));
-					$start = $leJour . " 10:00:00";
-					$end = $leJour . " 11:00:00";
-					inscription\ajouterHoraireLibreBenevole($start, $end, $idBenevole, $id);
-				}
+				var_dump($horaireDebut);
+				var_dump($horaireFin);
 
-				if (isset($_REQUEST['11h'])) {
-					$leJour = date('Y-m-d', strtotime($_REQUEST['leJour']));
-					$start = $leJour . " 11:00:00";
-					$end = $leJour . " 12:00:00";
-					inscription\ajouterHoraireLibreBenevole($start, $end, $idBenevole, $id);
-				}
+				inscription\ajouterHoraireLibreBenevole($horaireDebut, $horaireFin, $idBenevole, $id);
 
-				if (isset($_REQUEST['12h'])) {
-					$leJour = date('Y-m-d', strtotime($_REQUEST['leJour']));
-					$start = $leJour . " 12:00:00";
-					$end = $leJour . " 13:00:00";
-					inscription\ajouterHoraireLibreBenevole($start, $end, $idBenevole, $id);
-				}
+				if ($_POST['jourSup'] > 0)
+				{
+					$debut = date('Y-m-d', strtotime($leDebut . ' + 1 days'));
+					require_once TEMPLATESPATH . 'v_header.php';
+					require_once VIEWSPATH . 'v_date.php';
 
-				if (isset($_REQUEST['13h'])) {
-					$leJour = date('Y-m-d', strtotime($_REQUEST['leJour']));
-					$start = $leJour . " 13:00:00";
-					$end = $leJour . " 14:00:00";
-					inscription\ajouterHoraireLibreBenevole($start, $end, $idBenevole, $id);
 				}
+				
 
-				if (isset($_REQUEST['14h'])) {
-					$leJour = date('Y-m-d', strtotime($_REQUEST['leJour']));
-					$start = $leJour . " 14:00:00";
-					$end = $leJour . " 15:00:00";
-					inscription\ajouterHoraireLibreBenevole($start, $end, $idBenevole, $id);
-				}
-
-				if (isset($_REQUEST['15h'])) {
-					$leJour = date('Y-m-d', strtotime($_REQUEST['leJour']));
-					$start = $leJour . " 15:00:00";
-					$end = $leJour . " 16:00:00";
-					inscription\ajouterHoraireLibreBenevole($start, $end, $idBenevole, $id);
-				}
-
-				if (isset($_REQUEST['16h'])) {
-					$leJour = date('Y-m-d', strtotime($_REQUEST['leJour']));
-					$start = $leJour . " 16:00:00";
-					$end = $leJour . " 17:00:00";
-					inscription\ajouterHoraireLibreBenevole($start, $end, $idBenevole, $id);
-				}
-
-				if (isset($_REQUEST['17h'])) {
-					$leJour = date('Y-m-d', strtotime($_REQUEST['leJour']));
-					$start = $leJour . " 17:00:00";
-					$end = $leJour . " 18:00:00";
-					inscription\ajouterHoraireLibreBenevole($start, $end, $idBenevole, $id);
-				}
-
-				if (isset($_REQUEST['18h'])) {
-					$leJour = date('Y-m-d', strtotime($_REQUEST['leJour']));
-					$start = $leJour . " 18:00:00";
-					$end = $leJour . " 19:00:00";
-					inscription\ajouterHoraireLibreBenevole($start, $end, $idBenevole, $id);
-				}
-
-				if (isset($_REQUEST['19h'])) {
-					$leJour = date('Y-m-d', strtotime($_REQUEST['leJour']));
-					$start = $leJour . " 19:00:00";
-					$end = $leJour . " 20:00:00";
-					inscription\ajouterHoraireLibreBenevole($start, $end, $idBenevole, $id);
-				}
-
-				if (isset($_REQUEST['20h'])) {
-					$leJour = date('Y-m-d', strtotime($_REQUEST['leJour']));
-					$start = $leJour . " 20:00:00";
-					$end = $leJour . " 21:00:00";
-					inscription\ajouterHoraireLibreBenevole($start, $end, $idBenevole, $id);
-				}
-
-				if (isset($_REQUEST['21h'])) {
-					$leJour = date('Y-m-d', strtotime($_REQUEST['leJour']));
-					$start = $leJour . " 21:00:00";
-					$end = $leJour . " 22:00:00";
-					inscription\ajouterHoraireLibreBenevole($start, $end, $idBenevole, $id);
-				}
-
-				if (isset($_REQUEST['22h'])) {
-					$leJour = date('Y-m-d', strtotime($_REQUEST['leJour']));
-					$start = $leJour . " 22:00:00";
-					$end = $leJour . " 23:00:00";
-					inscription\ajouterHoraireLibreBenevole($start, $end, $idBenevole, $id);
-				}
-
-				if (isset($_REQUEST['23h'])) {
-					$leJour = date('Y-m-d', strtotime($_REQUEST['leJour']));
-					$start = $leJour . " 23:00:00";
-					$leJour = date('Y-m-d', strtotime($leJour . ' + 1 days'));
-					$end = $leJour . " 00:00:00";
-					inscription\ajouterHoraireLibreBenevole($start, $end, $idBenevole, $id);
-				}
-
-				if (isset($_REQUEST['00h'])) {
-					$leJour = date('Y-m-d', strtotime($_REQUEST['leJour']));
-					$start = $leJour . " 00:00:00";
-					$leJour = date('Y-m-d', strtotime($leJour . ' + 1 days'));
-					$end = $leJour . " 01:00:00";
-					inscription\ajouterHoraireLibreBenevole($start, $end, $idBenevole, $id);
-				}
-
-				if (isset($_REQUEST['01h'])) {
-					$leJour = date('Y-m-d', strtotime($_REQUEST['leJour']));
-					$start = $leJour . " 01:00:00";
-					$leJour = date('Y-m-d', strtotime($leJour . ' + 1 days'));
-					$end = $leJour . " 02:00:00";
-					inscription\ajouterHoraireLibreBenevole($start, $end, $idBenevole, $id);
-				}
-
-				if (isset($_REQUEST['02h'])) {
-					$leJour = $_REQUEST['leJour'];
-					$start = $leJour . " 02:00:00";
-					$leJour = date('Y-m-d', strtotime($leJour . ' + 1 days'));
-					$end = $leJour . " 03:00:00";
-					inscription\ajouterHoraireLibreBenevole($start, $end, $idBenevole, $id);
-				}
-				require_once VIEWSPATH . 'v_date.php';
-				if ($_REQUEST['leJour'] < $uneSession['periodeFin']) {
+				//if ($_REQUEST['leJour'] < $uneSession['periodeFin']) {
 //					require_once VIEWSPATH . 'v_date.php';
-				} else {
-					require_once VIEWSPATH . 'v_profil.php';
-				}
+				//} else {
+					// require_once VIEWSPATH . 'v_profil.php';
+				//}
 			} else {
-				require_once TEMPLATESPATH . 'v_header.php';
-				require_once MODELSPATH . 'f_inscription.php';
-				//Affiche les sessions
-				$lesSessions = inscription\getSession();
-				var_dump($lesSessions);
 
-				require VIEWSPATH . 'v_profil.php';
 			}
 			break;
 		}

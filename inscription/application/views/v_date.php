@@ -10,8 +10,8 @@
 
             <?php $leDebut = date('Y-m-d', strtotime($debut . ' - '. $jourSup . ' days')); ?>
 
-            <?php while($jourSup > 0 ) 
-            { 
+            <?php // while($jourSup > 0 ) 
+            // { 
             ?>
 
             </br>
@@ -24,90 +24,94 @@
                 <h4>Matin</h4>
                 <!-- combobox matin (de 8h à  12h) -->
                 <td>Horaire de début</td>
-                <select name='matin' id='matin' class='form-control'>
-                    <option value="8h00">8h00</option>
-                    <option value="9h00">9h00</option>
-                    <option value="10h00">10h00</option>
-                    <option value="11h00">11h00</option>
-                    <option value="non-dispo-matin" selected="selected">Je ne suis pas disponible</option>
+                <select name='matin-d' id='matin-d' class='form-control'>
+                    <option value="08:00:00">8h00</option>
+                    <option value="09:00:00">9h00</option>
+                    <option value="10:00:00">10h00</option>
+                    <option value="11:00:00">11h00</option>
+                    <option value="non-dispo" selected="selected">Je ne suis pas disponible</option>
                 </select>
                 <td>Horaire de fin</td>
-                <select name='matin' id='matin' class='form-control'>
-                    <option value="9h00">9h00</option>
-                    <option value="10h00">10h00</option>
-                    <option value="11h00">11h00</option>
-                    <option value="12h00">12h00</option>
-                    <option value="non-dispo-matin" selected="selected">Je ne suis pas disponible</option>
+                <select name='matin-f' id='matin-f' class='form-control'>
+                    <option value="09:00:00">9h00</option>
+                    <option value="10:00:00">10h00</option>
+                    <option value="11:00:00">11h00</option>
+                    <option value="12:00:00">12h00</option>
+                    <option value="non-dispo" selected="selected">Je ne suis pas disponible</option>
                 </select></br>
 
                 <h4>Midi</h4>
                 <!-- combobox midi (de 12h à 14h) -->
                 <td>Horaire de début</td>
-                <select name='midi' id='midi' class='form-control'>
-                    <option value="12h00">12h00</option>
-                    <option value="13h00">13h00</option>
-                    <option value="non-dispo-midi" selected="selected">Je ne suis pas disponible</option>
+                <select name='midi-d' id='midi-d' class='form-control'>
+                    <option value="12:00:00">12h00</option>
+                    <option value="13:00:00">13h00</option>
+                    <option value="non-dispo" selected="selected">Je ne suis pas disponible</option>
                 </select>
                 <td>Horaire de fin</td>
-                <select name='midi' id='midi' class='form-control'>
-                    <option value="13h00">13h00</option>
-                    <option value="14h00">14h00</option>
-                    <option value="non-dispo-midi" selected="selected">Je ne suis pas disponible</option>
+                <select name='midi-f' id='midi-f' class='form-control'>
+                    <option value="13:00:00">13h00</option>
+                    <option value="14:00:00">14h00</option>
+                    <option value="non-dispo" selected="selected">Je ne suis pas disponible</option>
                 </select></br>
 
                 <h4>Après-midi</h4>
                 <!-- combobox après-midi (de 14h à 18h) -->
                 <td>Horaire de début</td>
-                <select name='midi' id='midi' class='form-control'>
-                    <option value="14h00">14h00</option>
-                    <option value="15h00">15h00</option>
-                    <option value="16h00">16h00</option>
-                    <option value="17h00">17h00</option>
-                    <option value="non-dispo-apresmidi" selected="selected">Je ne suis pas disponible</option>
+                <select name='apresmidi-d' id='apresmidi-d' class='form-control'>
+                    <option value="14:00:00">14h00</option>
+                    <option value="15:00:00">15h00</option>
+                    <option value="16:00:00">16h00</option>
+                    <option value="17:00:00">17h00</option>
+                    <option value="non-dispo" selected="selected">Je ne suis pas disponible</option>
                 </select>
                 <td>Horaire de fin</td>
-                <select name='midi' id='midi' class='form-control'>
-                    <option value="15h00">15h00</option>
-                    <option value="16h00">16h00</option>
-                    <option value="17h00">17h00</option>
-                    <option value="18h00">18h00</option>
-                    <option value="non-dispo-apresmidi" selected="selected">Je ne suis pas disponible</option>
+                <select name='apresmidi-f' id='apresmidi-f' class='form-control'>
+                    <option value="15:00:00">15h00</option>
+                    <option value="16:00:00">16h00</option>
+                    <option value="17:00:00">17h00</option>
+                    <option value="18:00:00">18h00</option>
+                    <option value="non-dispo" selected="selected">Je ne suis pas disponible</option>
                 </select></br>
 
                 <h4>Soir</h4>
                 <!-- combobox soir (de 18h à 02h) -->
                 <td>Horaire de début</td>
-                <select name='midi' id='midi' class='form-control'>
-                    <option value="18h00">18h00</option>
-                    <option value="19h00">19h00</option>
-                    <option value="20h00">20h00</option>
-                    <option value="21h00">21h00</option>
-                    <option value="22h00">22h00</option>
-                    <option value="23h00">23h00</option>
-                    <option value="00h00">00h00</option>
-                    <option value="01h00">01h00</option>
-                    <option value="non-dispo-soir" selected="selected">Je ne suis pas disponible</option>
+                <select name='soir-d' id='soir-d' class='form-control'>
+                    <option value="18:00:00">18h00</option>
+                    <option value="19:00:00">19h00</option>
+                    <option value="20:00:00">20h00</option>
+                    <option value="21:00:00">21h00</option>
+                    <option value="22:00:00">22h00</option>
+                    <option value="23:00:00">23h00</option>
+                    <option value="00:00:00">00h00</option>
+                    <option value="01:00:00">01h00</option>
+                    <option value="non-dispo" selected="selected">Je ne suis pas disponible</option>
                 </select>
                 <td>Horaire de fin</td>
-                <select name='midi' id='midi' class='form-control'>
-                    <option value="19h00">19h00</option>
-                    <option value="20h00">20h00</option>
-                    <option value="21h00">21h00</option>
-                    <option value="22h00">22h00</option>
-                    <option value="23h00">23h00</option>
-                    <option value="00h00">00h00</option>
-                    <option value="01h00">01h00</option>
-                    <option value="02h00">02h00</option>
-                    <option value="non-dispo-soir" selected="selected">Je ne suis pas disponible</option>
+                <select name='soir-f' id='soir-' class='form-control'>
+                    <option value="19h00-f">19h00</option>
+                    <option value="20h00-f">20h00</option>
+                    <option value="21h00-f">21h00</option>
+                    <option value="22h00-f">22h00</option>
+                    <option value="23h00-f">23h00</option>
+                    <option value="00h00-f">00h00</option>
+                    <option value="01h00-f">01h00</option>
+                    <option value="02h00-f">02h00</option>
+                    <option value="non-dispo" selected="selected">Je ne suis pas disponible</option>
                 </select>
                 </th>
                 </tr>
+                <input id="prodId" name="leDebut" type="hidden" value="<?php echo $leDebut; ?>">
+                <input id="prodId" name="jourSup" type="hidden" value="<?php echo $jourSup -= 1 ; ?>">
+
+             <!--   </form> -->
                 </tbody>
                 </br>
             <?php
-            $jourSup -= 1;
-            $leDebut = date('Y-m-d', strtotime($leDebut . ' + 1 days')); //on rajoute +1 jour à la date de début
-                } //fin de la boucle while
+          //  $jourSup -= 1;
+           // $leDebut = date('Y-m-d', strtotime($leDebut . ' + 1 days')); //on rajoute +1 jour à la date de début
+               // } //fin de la boucle while
 
 
             ?>
