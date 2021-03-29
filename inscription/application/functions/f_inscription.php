@@ -296,9 +296,9 @@ function updateHoraireBenevole($id, $idUtilisateur, $start, $end)
 //récupérer la date du début du festival
 function getDateSession()
 {
-    $pdo=connexionBD();
-    $req="SELECT periodeDebut, periodeFin FROM session";
-    $res=$pdo->query($req);
+    $pdo = connexionBD();
+    $req = "SELECT periodeDebut, periodeFin FROM session";
+    $res = $pdo->query($req)->fetch();
     return $res;
     disconnect();
 }

@@ -135,13 +135,34 @@ switch ($action) {
 				$dateSession = inscription\getDateSession();
 
 				$listeMissions = array();
-				$listeMissions = $_REQUEST['missions'];
+                $listeMissions = $_REQUEST['missions'];
 
-				foreach ($listeMissions as $uneMission) {
-					//Ajoute les missions par rapport à un utilisateur
-					inscription\ajouterMission($uneMission, $idUtilisateur);
-				}
-				$mission = implode(",", $listeMissions);
+                foreach ($listeMissions as $uneMission) {
+                    //Ajoute les missions par rapport à un utilisateur
+                    inscription\ajouterMission($uneMission, $idUtilisateur);
+                }
+                $mission = implode(",", $listeMissions);
+                $debutSession = $dateSession['periodeDebut'];
+                $finSession = $dateSession['periodeFin'];
+
+                //passer au format français
+                setlocale(LC_TIME, "fr_FR", "French");
+                $lesdates = array();
+
+                $debut = $debutSession; //on créer une variable $debut qui stocke la date de début du festival
+                $jourSup = 0; //on met le compteur à 0
+                while ($debut <= $finSession) //tant que la date de début et plus petite que la date de fin
+                {
+                    $lesdates[$jourSup]['leJour'] = date('Y-m-d', strtotime($debut));
+                    $lesdates[$jourSup]['nomJour'] = strftime("%A", strtotime($debut));
+                    $lesdates[$jourSup]['numJour'] = strftime("%d", strtotime($debut));
+                    $lesdates[$jourSup]['nomMois'] = strftime("%B", strtotime($debut));
+                    $lesdates[$jourSup]['nomAnnee'] = strftime("%G", strtotime($debut));
+
+                    $jourSup += 1; //on rajoute +1 au compteur
+                    $debut = date('Y-m-d', strtotime($debut . ' + 1 days')); //on rajoute +1 jour à la date de début
+                }
+
 				require_once VIEWSPATH . 'v_date.php';
 
 			} else {
@@ -154,6 +175,8 @@ switch ($action) {
 			}
 			break;
 		}
+
+		
 
 		case 'validationHoraire': {
 
