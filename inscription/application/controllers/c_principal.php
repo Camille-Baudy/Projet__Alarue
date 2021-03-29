@@ -149,7 +149,8 @@ switch ($action) {
                 setlocale(LC_TIME, "fr_FR", "French");
                 $lesdates = array();
 
-                $debut = $debutSession; //on créer une variable $debut qui stocke la date de début du festival
+				$debut = $debutSession; //on créer une variable $debut qui stocke la date de début du festival
+				$leDebut = $debut;
                 $jourSup = 0; //on met le compteur à 0
                 while ($debut <= $finSession) //tant que la date de début et plus petite que la date de fin
                 {
@@ -339,7 +340,7 @@ switch ($action) {
 				}
 				require_once VIEWSPATH . 'v_date.php';
 				if ($_REQUEST['leJour'] < $uneSession['periodeFin']) {
-					require_once VIEWSPATH . 'v_date.php';
+//					require_once VIEWSPATH . 'v_date.php';
 				} else {
 					require_once VIEWSPATH . 'v_profil.php';
 				}
