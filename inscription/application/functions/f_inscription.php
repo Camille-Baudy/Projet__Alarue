@@ -302,3 +302,13 @@ function getDateSession()
     return $res;
     disconnect();
 }
+
+//on récupère l'id du bénévole qui fait son inscription
+function getIdBenevole($nom, $prenom, $sexe, $email, $dateNaissance, $tel)
+{
+    $pdo = connexionBD();
+    $req = "SELECT idUtilisateur FROM utilisateur WHERE nom = '".$nom."' AND prenom = '".$prenom."' AND sexe = '".$sexe."' AND email = '".$email."' AND dateNaissance = '".$dateNaissance."' AND numTel = '".$tel."'";
+    $res = $pdo->query($req)->fetch();
+    return $res;
+    disconnect();
+}

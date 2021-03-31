@@ -65,7 +65,7 @@
 					</div>
 					<div class="form-group col-md-3">
                    		<label for="tel">Numéro de téléphone :</label><label class="text-danger">&nbsp*</label>
-                   		<input type="text" class="form-control" name="tel" maxlength="14" required placeholder="02 80 70 12 66">
+                   		<input type="text" class="form-control" name="tel" maxlength="10" required placeholder="0280701266">
 					</div>
                 </div>
             

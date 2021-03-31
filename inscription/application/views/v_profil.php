@@ -14,6 +14,7 @@
 			</div>
 		</div>
 		 <td class="centre info">
+		 <input id="prodId" name="idB" type="hidden" value="<?php echo $idB; ?>">
 			<input type="submit" value="Terminer l'inscription" name="btSubmit" class="btn btn-primary">
 		</td>
 	</div>

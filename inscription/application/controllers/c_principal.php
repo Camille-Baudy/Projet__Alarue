@@ -47,7 +47,7 @@ switch ($action) {
 				$_SESSION['email']         = trim($_REQUEST['email']);
 				$_SESSION['dateNaissance'] = trim($_REQUEST['dateNaissance']);
 				$_SESSION['rue']           = strip_tags($_REQUEST['rue']);
-				$_SESSION['ville']         = strip_tags($_REQUEST['ville']);
+				$_SESSION['ville']         = strip_tags(strtoupper($_REQUEST['ville']));
 				$_SESSION['cp']            = trim($_REQUEST['cp']);
 				$tel                       = strip_tags($_REQUEST['tel']);
 
@@ -110,6 +110,8 @@ switch ($action) {
 				require_once MODELSPATH . 'f_inscription.php';
 				//Ajout de l'utilisateur dans la BDD
 				inscription\creeInscription($nom, $prenom, $sexe, $email, $dateNaissance, $rue, $cp, $ville, $tel, $permis, $voiture, $tshirt, $anciennete, $benevoleAmis, $connaissance, $idSession);
+				//on récupère l'id de ce bénévole
+				$idB=inscription\getIdBenevole($nom, $prenom, $sexe, $email, $dateNaissance, $tel);
 			} else {
 				//Revenir page accueil inscription
 				require_once TEMPLATESPATH . 'v_header.php';
@@ -164,6 +166,7 @@ switch ($action) {
                     $debut = date('Y-m-d', strtotime($debut . ' + 1 days')); //on rajoute +1 jour à la date de début
 				}
 				
+				$idB = $_POST['idB'];
 				$leDebut = date('Y-m-d', strtotime($debut . ' - '. $jourSup . ' days'));
 				require_once VIEWSPATH . 'v_date.php';
 
@@ -307,7 +310,7 @@ switch ($action) {
 					{
 						if($_POST['soir-d'] == "00:00:00" || $_POST['soir-d'] == "01:00:00" || $_POST['soir-d'] == "02:00:00")
 						{
-							//on rajoute + 1 jour car on passe au lendemin
+							//on rajoute + 1 jour car on passe au lendemain
 							$leDebut=date('Y-m-d', strtotime($leDebut . ' + 1 days'));
 						}
 						$horaireDebutSoir=$leDebut." ".$_POST['soir-d'];
@@ -335,14 +338,16 @@ switch ($action) {
 
 				if ($_POST['jourSup'] > 0) //si le compteur n'est pas à 0, cela veut dire qu'il reste des jours pour le festival
 				{
-				//	$leDebut = date('Y-m-d', strtotime($leDebut . ' + 1 days'));
-					$leDebut;
+					$leDebut = $_POST['leDebut'];
+					$leDebut = date('Y-m-d', strtotime($leDebut . ' + 1 days'));
 					$jourSup = $_POST['jourSup'];
+					$idB = $_POST['idB'];
 					require_once TEMPLATESPATH . 'v_header.php';
 					require_once VIEWSPATH . 'v_date.php';
 				}
 				else //si le compteur est à 0, alors il ne reste plus de jour pour le festival
 				{
+					$idB = $_POST['idB'];
 					require_once TEMPLATESPATH . 'v_header.php';
 					require_once VIEWSPATH . 'v_profil.php';
 				}
@@ -354,35 +359,6 @@ switch ($action) {
 		}
 
 
-	case 'calendrier': {
-		require_once MODELSPATH . 'f_inscription.php';
-		$idUtilisateur = $_SESSION['utilisateur'];
-		//Affiche les événements par rapport à un utilisateur
-		$events = inscription\getEvenement($idUtilisateur);
-		//Affiche les informations de l'utilisateur
-		$info = inscription\getInfos($idUtilisateur);
-		//Affiche la date de début et la date de fin par rapport à un utilisateur
-		$laDate = inscription\getPeriode($idUtilisateur);
-		//	require_once VIEWSPATH.'v_calendrier.php';
-		require_once VIEWSPATH . 'v_profil.php';
-		break;
-	}
-
-	case 'add': {
-			require_once MODELSPATH . 'f_inscription.php';
-			$events = inscription\getEvenement($idUtilisateur);
-			$laDate = inscription\getPeriode($idUtilisateur);
-			require_once VIEWSPATH . 'addEvent.php';
-			break;
-		}
-
-	case 'edit': {
-			require_once MODELSPATH . 'f_inscription.php';
-			$events = inscription\getEvenement($idUtilisateur);
-			require_once VIEWSPATH . 'editEventTitle.php';
-			require_once VIEWSPATH . 'editEventDate.php';
-			break;
-		}
 
 	case 'photo': {
 			$idUtilisateur = $_POST['idUtilisateur'];
@@ -410,7 +386,7 @@ switch ($action) {
 						// On peut valider le fichier et le stocker définitivement
 						try {
 							require_once MODELSPATH . 'f_inscription.php';
-							$idUtilisateur = $_SESSION['utilisateur'];
+							$idUtilisateur = $_POST['idB'];
 							$avatar = $idUtilisateur . "_" . date('y-m-j') . "." . $extension_upload;
 							inscription\updateProfil($idUtilisateur, $avatar);
 							move_uploaded_file($_FILES['photo']['tmp_name'], 'resources/images/' . basename($avatar));

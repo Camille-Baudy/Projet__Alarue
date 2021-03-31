@@ -81,5 +81,6 @@
                         
                         <button type="submit" class="btn btn-primary">Valider</button> 
                     </fieldset>
+                    <input id="prodId" name="idB" type="hidden" value="<?php echo $idB; ?>">
              </form>
          </div>

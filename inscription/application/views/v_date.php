@@ -98,7 +98,7 @@
                 </tr>
                 <input id="prodId" name="leDebut" type="hidden" value="<?php echo $leDebut; ?>">
                 <input id="prodId" name="jourSup" type="hidden" value="<?php echo $jourSup -= 1 ; ?>">
-
+                <input id="prodId" name="idB" type="hidden" value="<?php echo $idB; ?>">
                 </tbody>
                 </br>
 
