@@ -162,8 +162,9 @@ switch ($action) {
 
                     $jourSup += 1; //on rajoute +1 au compteur
                     $debut = date('Y-m-d', strtotime($debut . ' + 1 days')); //on rajoute +1 jour à la date de début
-                }
-
+				}
+				
+				$leDebut = date('Y-m-d', strtotime($debut . ' - '. $jourSup . ' days'));
 				require_once VIEWSPATH . 'v_date.php';
 
 			} else {
@@ -201,45 +202,153 @@ switch ($action) {
 					$id=$idS['idSession'];
 				}
 
-				if (isset($_REQUEST['non-dispo'])) {
-					//on fait rien
-				}
-
-				$horaireDebut="";
-				$horaireFin="";
 				//$leDebut correspond à la date dans v_date.php
-				$leDebut=$_POST['dateJour'];
-				var_dump($leDebut);
+				$leDebut=$_POST['leDebut'];
+
+				$horaireDebutMatin="";
+				$horaireFinMatin="";
 				//horaire de début MATIN
-				if (isset($_POST['matin-d'])) {
-					$horaireDebut=$leDebut." ".$_POST['matin-d'];
-				}
-				
-				if (isset($_POST['matin-f'])) {
-					$horaireFin=$leDebut." ".$_POST['matin-f'];
-				}
-
-				var_dump($horaireDebut);
-				var_dump($horaireFin);
-
-				inscription\ajouterHoraireLibreBenevole($horaireDebut, $horaireFin, $idBenevole, $id);
-
-				if ($_POST['jourSup'] > 0)
+				if (isset($_POST['matin-d'])) 
 				{
-					$debut = date('Y-m-d', strtotime($leDebut . ' + 1 days'));
+					if($_POST['matin-d'] == "non-dispo")
+					{
+						//on ne fait rien car la personne n'est pas disponible
+					}
+					else
+					{
+						$horaireDebutMatin=$leDebut." ".$_POST['matin-d'];
+
+					}
+				}
+				//horaire de fin MATIN
+				if (isset($_POST['matin-f'])) 
+				{
+					if ($_POST['matin-f'] == "non-dispo") 
+					{
+						//on ne fait rien car la personne n'est pas disponible
+                    }
+					else
+					{
+						$horaireFinMatin=$leDebut." ".$_POST['matin-f'];				
+						//on enregistre l'horaire du matin
+						inscription\ajouterHoraireLibreBenevole($horaireDebutMatin, $horaireFinMatin, $idBenevole, $id);
+					}
+				}
+
+				$horaireDebutMidi="";
+				$horaireFinMidi="";
+				//horaire de début MIDI
+				if (isset($_POST['midi-d'])) 
+				{
+					if($_POST['midi-d'] == "non-dispo")
+					{
+
+					}
+					else
+					{
+						$horaireDebutMidi=$leDebut." ".$_POST['midi-d'];
+					}
+				}
+				//horaire de fin MIDI
+				if (isset($_POST['midi-f'])) 
+				{
+					if($_POST['midi-f'] == "non-dispo")
+					{
+
+					}
+					else
+					{
+						$horaireFinMidi=$leDebut." ".$_POST['midi-f'];
+						//on enregistre l'horaire du midi
+						inscription\ajouterHoraireLibreBenevole($horaireDebutMidi, $horaireFinMidi, $idBenevole, $id);
+					}
+				}
+
+
+				$horaireDebutAM="";
+				$horaireFinAM="";
+				//horaire de début APRES-MIDI
+				if (isset($_POST['apresmidi-d'])) 
+				{
+					if($_POST['apresmidi-d'] == "non-dispo")
+					{
+
+					}
+					else
+					{
+						$horaireDebutAM=$leDebut." ".$_POST['apresmidi-d'];
+					}
+				}
+				//horaire de fin APRES-MIDI
+				if (isset($_POST['apresmidi-f'])) 
+				{
+					if($_POST['apresmidi-f'] == "non-dispo")
+					{
+
+					}
+					else
+					{
+						$horaireFinAM=$leDebut." ".$_POST['apresmidi-f'];						
+						//on enregistre l'horaire de l'après-midi
+						inscription\ajouterHoraireLibreBenevole($horaireDebutAM, $horaireFinAM, $idBenevole, $id);
+					}
+				}
+
+				$horaireDebutSoir="";
+				$horaireFinSoir="";
+				//horaire de début SOIR
+				if (isset($_POST['soir-d'])) 
+				{
+					if($_POST['soir-d'] == "non-dispo")
+					{
+
+					}
+					else
+					{
+						if($_POST['soir-d'] == "00:00:00" || $_POST['soir-d'] == "01:00:00" || $_POST['soir-d'] == "02:00:00")
+						{
+							//on rajoute + 1 jour car on passe au lendemin
+							$leDebut=date('Y-m-d', strtotime($leDebut . ' + 1 days'));
+						}
+						$horaireDebutSoir=$leDebut." ".$_POST['soir-d'];
+					}
+				}
+				//horaire de fin SOIR
+				if (isset($_POST['soir-f'])) 
+				{
+					if($_POST['soir-f'] == "non-dispo")
+					{
+
+					}
+					else
+					{
+						if($_POST['soir-f'] == "00:00:00" || $_POST['soir-f'] == "01:00:00" || $_POST['soir-f'] == "02:00:00")
+						{
+							//on rajoute + 1 jour car on passe au lendemin
+							$leDebut=date('Y-m-d', strtotime($leDebut . ' + 1 days'));
+						}
+						$horaireFinSoir=$leDebut." ".$_POST['soir-f'];
+						//on enregistre l'horaire du soir
+						inscription\ajouterHoraireLibreBenevole($horaireDebutSoir, $horaireFinSoir, $idBenevole, $id);
+					}
+				}
+
+				if ($_POST['jourSup'] > 0) //si le compteur n'est pas à 0, cela veut dire qu'il reste des jours pour le festival
+				{
+				//	$leDebut = date('Y-m-d', strtotime($leDebut . ' + 1 days'));
+					$leDebut;
+					$jourSup = $_POST['jourSup'];
 					require_once TEMPLATESPATH . 'v_header.php';
 					require_once VIEWSPATH . 'v_date.php';
-
+				}
+				else //si le compteur est à 0, alors il ne reste plus de jour pour le festival
+				{
+					require_once TEMPLATESPATH . 'v_header.php';
+					require_once VIEWSPATH . 'v_profil.php';
 				}
 				
-
-				//if ($_REQUEST['leJour'] < $uneSession['periodeFin']) {
-//					require_once VIEWSPATH . 'v_date.php';
-				//} else {
-					// require_once VIEWSPATH . 'v_profil.php';
-				//}
 			} else {
-
+				//je sais pas pour l'instant
 			}
 			break;
 		}

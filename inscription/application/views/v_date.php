@@ -8,12 +8,6 @@
             <h1>Merci de renseigner vos horaires !</h1>
             
 
-            <?php $leDebut = date('Y-m-d', strtotime($debut . ' - '. $jourSup . ' days')); ?>
-
-            <?php // while($jourSup > 0 ) 
-            // { 
-            ?>
-
             </br>
             <h3><?php echo $leDebut; ?></h3>
 
@@ -89,15 +83,15 @@
                     <option value="non-dispo" selected="selected">Je ne suis pas disponible</option>
                 </select>
                 <td>Horaire de fin</td>
-                <select name='soir-f' id='soir-' class='form-control'>
-                    <option value="19h00-f">19h00</option>
-                    <option value="20h00-f">20h00</option>
-                    <option value="21h00-f">21h00</option>
-                    <option value="22h00-f">22h00</option>
-                    <option value="23h00-f">23h00</option>
-                    <option value="00h00-f">00h00</option>
-                    <option value="01h00-f">01h00</option>
-                    <option value="02h00-f">02h00</option>
+                <select name='soir-f' id='soir-f' class='form-control'>
+                <option value="19:00:00">19h00</option>
+                    <option value="20:00:00">20h00</option>
+                    <option value="21:00:00">21h00</option>
+                    <option value="22:00:00">22h00</option>
+                    <option value="23:00:00">23h00</option>
+                    <option value="00:00:00">00h00</option>
+                    <option value="01:00:00">01h00</option>
+                    <option value="02:00:00">02h00</option>
                     <option value="non-dispo" selected="selected">Je ne suis pas disponible</option>
                 </select>
                 </th>
@@ -105,16 +99,8 @@
                 <input id="prodId" name="leDebut" type="hidden" value="<?php echo $leDebut; ?>">
                 <input id="prodId" name="jourSup" type="hidden" value="<?php echo $jourSup -= 1 ; ?>">
 
-             <!--   </form> -->
                 </tbody>
                 </br>
-            <?php
-          //  $jourSup -= 1;
-           // $leDebut = date('Y-m-d', strtotime($leDebut . ' + 1 days')); //on rajoute +1 jour à la date de début
-               // } //fin de la boucle while
-
-
-            ?>
 
                                         <input id="prodId" name="leJour" type="hidden" value="<?php echo $debut ?>">
 
@@ -122,8 +108,11 @@
                                         <br/>
 
 
+                                            <?php if($jourSup > 0){ ?>
+                                            <button type="submit" class="btn btn-primary">Continuer</button>
+                                            <?php } else { ?>
                                             <button type="submit" class="btn btn-primary">Terminer</button>
-
+                                            <?php } ?>
 
                                     </fieldset>
                                 </form>
