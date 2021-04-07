@@ -38,6 +38,6 @@
     define('DB_LOGIN', 'root');
 //Le mot de passe sur la base
     //define('DB_PASSWORD', 'Alarue58*');
-    define('DB_PASSWORD', '');
+    define('DB_PASSWORD', 'root');
 
 ?>

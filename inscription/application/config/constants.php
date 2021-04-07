@@ -31,5 +31,5 @@ define('DB_NAME', 'dbs316935-1');
 //Le login sur la base
 define('DB_LOGIN', 'root');
 //Le mot de passe sur la base
-define('DB_PASSWORD', '');
+define('DB_PASSWORD', 'root');
 

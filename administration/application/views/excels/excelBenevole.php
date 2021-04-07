@@ -125,24 +125,25 @@ header('Content-Disposition: attachment; filename="benevoles_'.$laSession['nomSe
         <td><?php echo $unBenevole['anciennete'] ?></td>
         <td><?php echo utf8_decode($unBenevole['connaissance']) ?></td>
         <td><?php echo utf8_decode($unBenevole['commentaires']) ?></td>
-        <td>///// NE MARCHE PAS /////
+        <td>
             <?php
                 $idUtilisateur=personne\getIdBenevole($unBenevole['nom'], $unBenevole['prenom'], $unBenevole['sexe'], $unBenevole['email']);
-                $lesdisponibités="";
+                $lesdisponibités= array();
                 foreach($idUtilisateur as $id)
                 {
-                    $lesdisponibités=personne\getLesHorairesDuBenevole($id['idUtilisateur']);
-                    var_dump($id['idUtilisateur']);
+                    $lesdisponibités[]=personne\getLesHorairesDuBenevole($id[0]);
+                    var_dump($lesdisponibités);
                     foreach($lesdisponibités as $uneDispo)
                     {
-                        if($uneDispo['idUtilisateur'] == $id[0])
+                        $i=0;
+                        $dispo = $uneDispo[$i];
+                        if($dispo[5] == $id[0])
                         {
-                            echo $uneDispo['star']." // ".$uneDispo['end']."</br>";
+                            echo $dispo[2]." // ".$dispo[3]."</br>";
                         }
+                        $i= $i + 1;
                     }
                 }
-                var_dump($uneDispo['star']);
-                var_dump($uneDispo['end']);
             ?>
         </td>
     </tr>
