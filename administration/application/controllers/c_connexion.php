@@ -47,19 +47,15 @@ if(isset($securite)){
                     }
 
 
-                    $lesBenevoles = personne\getBenevolesSession($idSession);
+                    $lesBenevoles = personne\getBenevolesSession();
                     $lesLieux = personne\getLieux();
-                    $laSession = personne\getLaSession($idSession);
+                    $laSession = personne\getLaSession();
                     $lesSessions = personne\getSessions();
                     require_once TEMPLATESPATH.'v_header.php';
                     require_once VIEWSPATH.'v_home.php';
                 } else {
                     require_once MODELSPATH.'f_administrateur.php';
-                    personne\essaiSuppression();
 
-
-                    $lesSessions = personne\getSessions();
-                    $lesSessionsSup = personne\getSessionsSuppression();
                     $date = date('y-m-j');
 
                     $lesSessions = personne\getSessions();
@@ -592,6 +588,7 @@ if(isset($securite)){
                 $leBenevole = personne\getLeBenevole($idBenevole);
                 $lesMissions = personne\getMissionsBenevole($idBenevole);
                 $lesAffectations = personne\getAllAffectation();
+                $lesDisponibilites = personne\getLesHorairesDuBenevole($idBenevole);
                 require_once TEMPLATESPATH.'v_header.php';
                 require_once VIEWSPATH.'v_benevole_info.php';
 

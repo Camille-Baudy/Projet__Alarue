@@ -61,9 +61,9 @@ function modifierBloquageSession($idSession, $bloque){
 
 }
 
-function getLaSession($idSession){
+function getLaSession(){
     $pdo = connexionBD();
-    $resultat = $pdo->query('select * from session where idSession ='.$idSession);
+    $resultat = $pdo->query('select * from session');
     $res = $resultat->fetch();
     disconnect();
     return $res;
@@ -365,9 +365,9 @@ function deleteBenevole($idBenevole){
     disconnect();
 }
 
-function getBenevolesSession($idSession){
+function getBenevolesSession(){
     $pdo = connexionBD();
-    $resultat = $pdo->query('select * from utilisateur where idSession = '.$idSession.' ORDER BY nom');
+    $resultat = $pdo->query('select * from utilisateur  ORDER BY nom');
     $res = $resultat->fetchAll();
     disconnect();
     return $res;

@@ -78,6 +78,23 @@
             </div>
         </div>
 
+
+
+        <br>
+        <br>
+        <h2>Les disponibilités de <?php echo $leBenevole['nom']." ".$leBenevole['prenom'] ?> :</h2>
+        <br>
+        <br>
+        <?php 
+            foreach($lesDisponibilites as $uneDispo)
+            {
+                
+                echo $uneDispo['start'].' '.$uneDispo['end'].'<br>';
+            }
+        ?>
+
+
+
         <br>
         <br>
         <h2>Liste des missions que souhaiterait faire <?php echo $leBenevole['nom']." ".$leBenevole['prenom'] ?> : </h2>
@@ -143,8 +160,17 @@
                 <?php $info = 1; ?>
                 <div class="form-group">
                      <div class="input-group-prepend">
-                         <button type="button" class="btn btn-light">Logistique</button>
+                         <button type="button" class="btn" style="background-color: C3C8CD !important; color : black !important">Logistique</button>
                          <input type="text" class="form-control" placeholder="Logistique - Aider à l'installation des infrastructures (chapiteaux, tentes, scènes)."readonly>
+                     </div>
+                </div>
+            <?php endif; ?>
+            <?php if ($uneMission['idMission']==8): ?>
+                <?php $info = 1; ?>
+                <div class="form-group">
+                     <div class="input-group-prepend">
+                         <button type="button" class="btn" style="background-color: DC86EA !important; color:white;">Entrée Site</button>
+                         <input type="text" class="form-control" placeholder="Compter le nombre de spectateur avant chaque spectacle pour faire respecter les gestes barrières."readonly>
                      </div>
                 </div>
             <?php endif; ?>
@@ -171,10 +197,3 @@
         </form>
 
     </div>
-
-    <!-- VOIR SON EMPLOI DU TEMPS SOUS FORME DE CALENDRIER -->
-	<div class="container">
-		<form role="form" method="POST" action="index.php?action=voirCalendrier">
-            <input class="zone btn btn-primary" type="submit" value="Voir Calendrier" size="20" />
-        </form>
-	</div>
