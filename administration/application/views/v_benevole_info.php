@@ -88,8 +88,21 @@
         <?php 
             foreach($lesDisponibilites as $uneDispo)
             {
-                
-                echo $uneDispo['start'].' '.$uneDispo['end'].'<br>';
+                $laDateDebut = explode(" ",$uneDispo['start']); //on sépare la date et l'heure
+                $leJourDebut = $laDateDebut[0]; //on récupère la date
+                $laDateFin = explode(" ",$uneDispo['end']);
+                $leJourFin = $laDateFin[0];
+
+                if($leJourDebut == $leJourFin)
+                {
+                    echo "<strong>".$leJourDebut."</strong> : de ".$laDateDebut[1]." à ".$laDateFin[1]."<br>";
+                }
+
+                if($leJourDebut < $leJourFin)
+                {
+                    echo "<strong>".$leJourDebut."</strong> : de ".$laDateDebut[1]." à ".$laDateFin[1]."<br>";
+                }
+
             }
         ?>
 
