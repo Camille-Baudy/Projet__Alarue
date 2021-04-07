@@ -1259,7 +1259,7 @@ if(isset($securite)){
                 $lesLieux = personne\getLieux();
 
 
-
+//azertyuiop
                 require_once TEMPLATESPATH.'v_header.php';
                 require_once VIEWSPATH.'v_organisationSpectacle_info.php';
 
